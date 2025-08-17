@@ -1,6 +1,6 @@
 # Import all viewsets from the new package structure
 from .views import (ActionHistoryViewSet, CompanyViewSet, ComplaintViewSet,
-                    ProducerViewSet, UserViewSet)
+                    ProducerViewSet, StatisticsViewSet, UserViewSet)
 
 __all__ = [
     'UserViewSet',
@@ -8,4 +8,5 @@ __all__ = [
     'ProducerViewSet',
     'ComplaintViewSet',
     'ActionHistoryViewSet',
+    'StatisticsViewSet'
 ]
