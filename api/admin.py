@@ -100,10 +100,10 @@ class ComplaintAdmin(admin.ModelAdmin):
         if obj is None:  # Creating a new complaint
             return (
                 (None, {
-                    'fields': ('number', 'commodity_name', 'producer', 'date_of_purchase', 'type', 'user')
+                    'fields': ('number', 'barcode', 'commodity_name', 'producer', 'date_of_purchase', 'type', 'user')
                 }),
                 ('Product Information', {
-                    'fields': ('barcode', 'quantity', 'registration_unit')
+                    'fields': ('quantity', 'registration_unit')
                 }),
                 ('Details', {
                     'fields': ('description', 'demand')
@@ -112,10 +112,10 @@ class ComplaintAdmin(admin.ModelAdmin):
         else:  # Editing an existing complaint
             return (
                 (None, {
-                    'fields': ('number', 'producer', 'type', 'user', 'status', 'exit_date', 'deadline')
+                    'fields': ('number', 'barcode', 'producer', 'type', 'user', 'status', 'exit_date', 'deadline')
                 }),
                 ('Product Information', {
-                    'fields': ('barcode', 'quantity', 'registration_unit')
+                    'fields': ('quantity', 'registration_unit')
                 }),
                 ('Details', {
                     'fields': ('description', 'demand')

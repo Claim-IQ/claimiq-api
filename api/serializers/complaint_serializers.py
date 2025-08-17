@@ -4,6 +4,9 @@ from ..models import Complaint
 
 
 class ComplaintSerializer(serializers.ModelSerializer):
+    type = serializers.StringRelatedField()
+    registration_unit = serializers.StringRelatedField()
+
     class Meta:
         model = Complaint
         fields = '__all__'

@@ -4,12 +4,23 @@ from datetime import date, timedelta
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from ..models.dictionaries.complaint_status import ComplaintStatus
+
 
 def default_deadline():
     return date.today() + timedelta(days=15)
 
 
+def get_default_status():
+    obj, _ = ComplaintStatus.objects.get_or_create(
+        code="not_started",
+        defaults={"label": "Not Started"}
+    )
+    return obj
+
+
 class Complaint(models.Model):
+
     """Complaint model"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     number = models.CharField(max_length=50, unique=True)
@@ -53,6 +64,7 @@ class Complaint(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        default=get_default_status,
         related_name="complaints"
     )
     decision = models.ForeignKey(
