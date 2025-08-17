@@ -11,6 +11,7 @@ from .dictionaries.complaint_type_serializers import ComplaintTypeSerializer
 from .dictionaries.producer_serializers import ProducerSerializer
 from .dictionaries.registration_unit_serializers import \
     RegistrationUnitSerializer
+from .logentry_serializers import LogEntrySerializer
 from .user_serializers import UserCreateSerializer, UserSerializer
 
 __all__ = [
@@ -25,4 +26,5 @@ __all__ = [
     'ProducerSerializer',
     'ComplaintSerializer',
     'ActionHistorySerializer',
+    'LogEntrySerializer'
 ]

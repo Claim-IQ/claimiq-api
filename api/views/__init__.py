@@ -8,6 +8,7 @@ from .dictionaries.complaint_status_views import ComplaintStatusViewSet
 from .dictionaries.complaint_type_views import ComplaintTypeViewSet
 from .dictionaries.producer_views import ProducerViewSet
 from .dictionaries.registration_unit_views import RegistrationUnitViewSet
+from .logentry_views import LogEntryViewSet
 from .statistics_views import StatisticsViewSet
 from .user_views import UserViewSet
 
@@ -22,5 +23,6 @@ __all__ = [
     'ProducerViewSet',
     'ComplaintViewSet',
     'ActionHistoryViewSet',
-    'StatisticsViewSet'
+    'StatisticsViewSet',
+    'LogEntryViewSet'
 ]
