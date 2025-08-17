@@ -88,8 +88,8 @@ class ActionTypeAdmin(admin.ModelAdmin):
 class ComplaintAdmin(admin.ModelAdmin):
     list_display = ['number', 'producer', 'type', 'user', 'status', 'barcode',
                     'quantity', 'registration_unit', 'submit_date', 'decision']
-    list_filter = ['commodity_name', 'producer',
-                   'type', 'user', 'status', 'submit_date', 'decision']
+    list_filter = ['producer', 'type', 'user',
+                   'status', 'submit_date', 'decision']
     search_fields = ['number']
     ordering = ['-submit_date']
     date_hierarchy = 'submit_date'
