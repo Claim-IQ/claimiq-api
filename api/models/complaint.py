@@ -12,10 +12,7 @@ def default_deadline():
 
 
 def get_default_status():
-    obj, _ = ComplaintStatus.objects.get_or_create(
-        code="not_started",
-        defaults={"label": "Not Started"}
-    )
+    obj, _ = ComplaintStatus.objects.get_or_create(code="not_started")
     return obj
 
 
