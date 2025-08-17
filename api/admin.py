@@ -87,13 +87,13 @@ class ActionTypeAdmin(admin.ModelAdmin):
 @admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
     list_display = ['number', 'producer', 'type', 'user', 'status', 'barcode',
-                    'quantity', 'registration_unit', 'submit_date', 'decision']
+                    'quantity', 'registration_unit', 'deadline', 'decision']
     list_filter = ['producer', 'type', 'user',
-                   'status', 'submit_date', 'decision']
+                   'status', 'deadline', 'decision']
     search_fields = ['number']
     ordering = ['-submit_date']
     date_hierarchy = 'submit_date'
-    list_editable = ['status']  # Allow quick status changes from list view
+    list_editable = ['status', 'decision']
     readonly_fields = ['deadline']
 
     def get_fieldsets(self, request, obj=None):
