@@ -27,15 +27,15 @@ class StatisticsViewSet(viewsets.ViewSet):
     def list(self, request):
         # --- Basic complaint statistics ---
         basic_stats = run_query("""
-            SELECT 
+            SELECT
                 COUNT(*) AS complaints_overall,
                 SUM(CASE WHEN cs.label = 'W trakcie' THEN 1 ELSE 0 END) AS complaints_in_progress,
                 COUNT(CASE WHEN c.exit_date IS NOT NULL THEN 1 END) AS complaints_exited,
                 CAST(AVG(c.exit_date - c.submit_date) AS INTEGER) AS average_consideration_days,
-                SUM(CASE 
-                    WHEN cs.label NOT IN ('Nie rozpoczęto', 'W trakcie') 
-                         AND CURRENT_DATE > c.deadline 
-                    THEN 1 ELSE 0 
+                SUM(CASE
+                    WHEN cs.label NOT IN ('Nie rozpoczęto', 'W trakcie')
+                         AND CURRENT_DATE > c.deadline
+                    THEN 1 ELSE 0
                 END) AS complaints_after_deadline
             FROM api_complaint c
             INNER JOIN api_complaintstatus cs
@@ -54,6 +54,7 @@ class StatisticsViewSet(viewsets.ViewSet):
                 ) sub
             ) ranked
             WHERE rank = 1
+                AND decision_id IS NOT NULL
         """, column="decision_id")
 
         most_common_producers = run_query("""
@@ -67,6 +68,7 @@ class StatisticsViewSet(viewsets.ViewSet):
                 ) sub
             ) ranked
             WHERE rank = 1
+                AND producer_id IS NOT NULL
         """, column="producer_id")
 
         most_common_products = run_query("""
@@ -80,6 +82,7 @@ class StatisticsViewSet(viewsets.ViewSet):
                 ) sub
             ) ranked
             WHERE rank = 1
+                AND commodity_name IS NOT NULL
         """, column="commodity_name")
 
         most_burdened_employees = run_query("""
@@ -96,6 +99,7 @@ class StatisticsViewSet(viewsets.ViewSet):
                 ) sub
             ) ranked
             WHERE rank = 1
+                AND user_id IS NOT NULL
         """, column="user_id")
 
         # --- Combine results ---
