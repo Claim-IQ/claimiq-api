@@ -50,13 +50,14 @@ class StatisticsViewSet(viewsets.ViewSet):
                 FROM (
                     SELECT decision_id, COUNT(*) AS cnt
                     FROM api_complaint
+                    WHERE decision_id IS NOT NULL
                     GROUP BY decision_id
-                ) sub
+                )
             ) ranked
             INNER JOIN api_complaintdecision cd
             ON cd.id = ranked.decision_id
             WHERE rank = 1
-                AND ranked.decision_id IS NOT NULL
+                AND cd.label IS NOT NULL
         """, column="label")
 
         most_common_producers = run_query("""
@@ -66,6 +67,7 @@ class StatisticsViewSet(viewsets.ViewSet):
                 FROM (
                     SELECT producer_id, COUNT(*) AS cnt
                     FROM api_complaint
+                    WHERE producer_id IS NOT NULL
                     GROUP BY producer_id
                 ) sub
             ) ranked
@@ -82,6 +84,7 @@ class StatisticsViewSet(viewsets.ViewSet):
                 FROM (
                     SELECT commodity_name, COUNT(*) AS cnt
                     FROM api_complaint
+                    WHERE commodity_name IS NOT NULL
                     GROUP BY commodity_name
                 ) sub
             ) ranked
