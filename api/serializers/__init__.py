@@ -1,8 +1,6 @@
 # Serializers package
-from .action_history_serializers import ActionHistorySerializer
 from .company_serializers import CompanySerializer
 from .complaint_serializers import ComplaintSerializer
-from .dictionaries.action_type_serializers import ActionTypeSerializer
 from .dictionaries.complaint_decision_serializers import \
     ComplaintDecisionSerializer
 from .dictionaries.complaint_status_serializers import \
@@ -15,7 +13,6 @@ from .logentry_serializers import LogEntrySerializer
 from .user_serializers import UserCreateSerializer, UserSerializer
 
 __all__ = [
-    'ActionTypeSerializer',
     'UserSerializer',
     'UserCreateSerializer',
     'CompanySerializer',
@@ -25,6 +22,5 @@ __all__ = [
     'RegistrationUnitSerializer',
     'ProducerSerializer',
     'ComplaintSerializer',
-    'ActionHistorySerializer',
     'LogEntrySerializer'
 ]

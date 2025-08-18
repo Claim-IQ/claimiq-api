@@ -1,10 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .enums import UserRole
-from .models import (ActionType, Company, Complaint, ComplaintDecision,
-                     ComplaintStatus, ComplaintType, Producer,
-                     RegistrationUnit, User)
+from .models import (Company, Complaint, ComplaintDecision, ComplaintStatus,
+                     ComplaintType, Producer, RegistrationUnit, User)
 
 
 @admin.register(User)
@@ -72,13 +70,6 @@ class ComplaintTypeAdmin(admin.ModelAdmin):
 
 @admin.register(RegistrationUnit)
 class RegistrationUnitAdmin(admin.ModelAdmin):
-    list_display = ['label']
-    search_fields = ['label']
-    ordering = ['label']
-
-
-@admin.register(ActionType)
-class ActionTypeAdmin(admin.ModelAdmin):
     list_display = ['label']
     search_fields = ['label']
     ordering = ['label']

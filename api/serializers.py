@@ -1,7 +1,7 @@
 # Import all serializers from the new package structure
-from .serializers import (ActionHistorySerializer, CompanySerializer,
-                          ComplaintSerializer, ProducerSerializer,
-                          UserCreateSerializer, UserSerializer)
+from .serializers import (CompanySerializer, ComplaintSerializer,
+                          ProducerSerializer, UserCreateSerializer,
+                          UserSerializer)
 
 __all__ = [
     'UserSerializer',
@@ -9,5 +9,4 @@ __all__ = [
     'CompanySerializer',
     'ProducerSerializer',
     'ComplaintSerializer',
-    'ActionHistorySerializer',
 ]

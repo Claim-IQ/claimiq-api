@@ -1,6 +1,5 @@
 # Import all models from the new package structure
-from .models import (ActionHistory, Company, Complaint, CustomUserManager,
-                     Producer, User)
+from .models import Company, Complaint, CustomUserManager, Producer, User
 
 __all__ = [
     'User',
@@ -8,5 +7,4 @@ __all__ = [
     'Company',
     'Producer',
     'Complaint',
-    'ActionHistory',
 ]

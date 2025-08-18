@@ -15,17 +15,6 @@ def create_default_complaint_statuses(apps, schema_editor):
         ComplaintStatus.objects.get_or_create(**status)
 
 
-def create_default_action_types(apps, schema_editor):
-    ActionType = apps.get_model('api', 'ActionType')
-    types = [
-        {"code": "created", "label": "Utworzono"},
-        {"code": "rejected", "label": "Odrzucono"},
-        {"code": "updated", "label": "Zaktualizowano"},
-    ]
-    for type in types:
-        ActionType.objects.get_or_create(**type)
-
-
 def create_default_complaint_decisions(apps, schema_editor):
     ComplaintDecision = apps.get_model('api', 'ComplaintDecision')
     decisions = [
@@ -77,7 +66,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(create_default_complaint_statuses),
-        migrations.RunPython(create_default_action_types),
         migrations.RunPython(create_default_complaint_decisions),
         migrations.RunPython(create_default_complaint_types),
         migrations.RunPython(create_default_registration_units),

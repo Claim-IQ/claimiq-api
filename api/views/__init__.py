@@ -1,8 +1,6 @@
 # Views package
-from .action_history_views import ActionHistoryViewSet
 from .company_views import CompanyViewSet
 from .complaint_views import ComplaintViewSet
-from .dictionaries.action_type_views import ActionTypeViewSet
 from .dictionaries.complaint_decision_views import ComplaintDecisionViewSet
 from .dictionaries.complaint_status_views import ComplaintStatusViewSet
 from .dictionaries.complaint_type_views import ComplaintTypeViewSet
@@ -13,7 +11,6 @@ from .statistics_views import StatisticsViewSet
 from .user_views import UserViewSet
 
 __all__ = [
-    'ActionTypeViewSet',
     'UserViewSet',
     'CompanyViewSet',
     'ComplaintDecisionViewSet',
@@ -22,7 +19,6 @@ __all__ = [
     'RegistrationUnitViewSet',
     'ProducerViewSet',
     'ComplaintViewSet',
-    'ActionHistoryViewSet',
     'StatisticsViewSet',
     'LogEntryViewSet'
 ]
