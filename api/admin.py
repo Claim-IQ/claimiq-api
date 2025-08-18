@@ -77,8 +77,8 @@ class RegistrationUnitAdmin(admin.ModelAdmin):
 
 @admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
-    list_display = ['number', 'producer', 'type', 'user', 'status', 'barcode',
-                    'quantity', 'registration_unit', 'submit_date', 'deadline', 'decision']
+    list_display = ['number', 'producer', 'commodity_name', 'type', 'user', 'status', 'barcode',
+                    'quantity', 'registration_unit', 'submit_date', 'exit_date', 'deadline', 'decision']
     list_filter = ['producer', 'type', 'user',
                    'status', 'submit_date', 'deadline', 'decision']
     search_fields = ['number']
@@ -103,7 +103,7 @@ class ComplaintAdmin(admin.ModelAdmin):
         else:  # Editing an existing complaint
             return (
                 (None, {
-                    'fields': ('number', 'barcode', 'producer', 'type', 'user', 'status', 'submit_date', 'exit_date', 'deadline')
+                    'fields': ('number', 'barcode', 'commodity_name', 'producer', 'type', 'user', 'status', 'submit_date', 'exit_date', 'deadline')
                 }),
                 ('Product Information', {
                     'fields': ('quantity', 'registration_unit')
