@@ -26,7 +26,7 @@ class StatisticsViewSet(viewsets.ViewSet):
 
     def list(self, request):
         # --- Basic complaint statistics ---
-        basic_stats = run_query("""
+        metrics = run_query("""
             SELECT
                 COUNT(*) AS complaints_overall,
                 SUM(CASE WHEN cs.label = 'W trakcie' THEN 1 ELSE 0 END) AS complaints_in_progress,
@@ -44,7 +44,7 @@ class StatisticsViewSet(viewsets.ViewSet):
 
         # --- Other stats ---
         most_frequent_decisions = run_query("""
-            SELECT decision_id
+            SELECT cd.label
             FROM (
                 SELECT decision_id, DENSE_RANK() OVER (ORDER BY cnt DESC) AS rank
                 FROM (
@@ -53,12 +53,14 @@ class StatisticsViewSet(viewsets.ViewSet):
                     GROUP BY decision_id
                 ) sub
             ) ranked
+            INNER JOIN api_complaintdecision cd
+            ON cd.id = ranked.decision_id
             WHERE rank = 1
-                AND decision_id IS NOT NULL
-        """, column="decision_id")
+                AND ranked.decision_id IS NOT NULL
+        """, column="label")
 
         most_common_producers = run_query("""
-            SELECT producer_id
+            SELECT p.name
             FROM (
                 SELECT producer_id, DENSE_RANK() OVER (ORDER BY cnt DESC) AS rank
                 FROM (
@@ -67,9 +69,11 @@ class StatisticsViewSet(viewsets.ViewSet):
                     GROUP BY producer_id
                 ) sub
             ) ranked
+            INNER JOIN api_producer p
+            ON p.id = ranked.producer_id
             WHERE rank = 1
-                AND producer_id IS NOT NULL
-        """, column="producer_id")
+                AND ranked.producer_id IS NOT NULL
+        """, column="name")
 
         most_common_products = run_query("""
             SELECT commodity_name
@@ -104,7 +108,7 @@ class StatisticsViewSet(viewsets.ViewSet):
 
         # --- Combine results ---
         stats = {
-            **basic_stats,
+            **metrics,
             "most_frequent_decisions": most_frequent_decisions,
             "most_common_producers": most_common_producers,
             "most_common_products": most_common_products,
